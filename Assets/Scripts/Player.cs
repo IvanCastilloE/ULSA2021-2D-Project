@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
     [SerializeField, Range(0.1f, 10f)]
@@ -70,8 +73,10 @@ public class Player : MonoBehaviour
         if(other.CompareTag("Coin"))
         {
             Coin coin = other.GetComponent<Coin>();
+
+            GameManager.instance.GetScore.AddPoints(coin.Points);
             Destroy(other.gameObject);
-            Debug.Log(coin.Points);
+            //Debug.Log(coin.Points);
         }    
     }
 }
